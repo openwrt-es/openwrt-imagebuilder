@@ -16,6 +16,7 @@ IB_DIR=""
 RM_BIN=1
 RM_IB=0
 RM_IB_TAR=0
+RM_IB_BIN=1
 
 function release_version() {
 	FW_RELEASE="$1"
@@ -39,9 +40,11 @@ function build_firmware() {
 
 	cd $IB_DIR
 
+	[ $RM_IB_BIN -eq 1 ] && rm -rf $IB_DIR/bin
+
 	make image PROFILE="$profile" PACKAGES="$packages" FILES="$files"
 
-	cd bin/$target
+	cd $IB_DIR/bin/$target
 	mkdir -p $BIN_DIR/$target
 	cp $firmwares $BIN_DIR/$target/
 }
