@@ -2,6 +2,8 @@
 
 . lib/ib.sh
 
+BCM63xx_SSB="-kmod-b43 -wpad-mini kmod-brcm-wl nas wlc"
+
 function movistar_ftth() {
 	local script_dir="$1/usr/sbin"
 	local script="$script_dir/movistar"
@@ -14,7 +16,7 @@ function movistar_ftth() {
 function main() {
 	movistar_ftth "$CW_DIR/files_movistar"
 
-	release_version "chaos_calmer" "15.05-rc3"
+	release_version "chaos_calmer" "15.05"
 	firmware_packages "kmod-bridge kmod-ipt-nathelper-rtsp bird4 mcproxy miniupnpd udpxy xupnpd luci luci-app-ddns luci-app-udpxy luci-app-upnp luci-proto-ipv6"
 	firmware_files "$CW_DIR/files_movistar/"
 
@@ -25,10 +27,10 @@ function main() {
 	build_firmware "ar71xx" "TLWR1043" "openwrt-*-tl-wr1043nd*.*"
 
 	prepare_imagebuilder "brcm63xx/generic" "brcm63xx-generic"
-	build_firmware "brcm63xx" "WAP5813n" "openwrt-*generic*-WAP-5813n*.*"
+	build_firmware "brcm63xx" "WAP5813n" "openwrt-*generic*-WAP-5813n*.*" "$BCM63xx_SSB"
 
 	prepare_imagebuilder "brcm63xx/smp" "brcm63xx-smp"
-	build_firmware "brcm63xx" "WAP5813n" "openwrt-*smp*-WAP-5813n*.*"
+	build_firmware "brcm63xx" "WAP5813n" "openwrt-*smp*-WAP-5813n*.*" "$BCM63xx_SSB"
 
 	prepare_imagebuilder "mvebu/generic" "mvebu"
 	build_firmware "mvebu" "Caiman" "openwrt-*-linksys-caiman*.*"
