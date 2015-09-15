@@ -10,8 +10,8 @@ function main() {
 	firmware_packages "luci luci-proto-ipv6"
 
 	prepare_imagebuilder "brcm63xx/generic" "brcm63xx-generic"
-	build_firmware "brcm63xx" "A4001N" "openwrt-*-AR-4001N-*.*" "$BCM63xx_BCMA"
-	build_firmware "brcm63xx" "A4001N1" "openwrt-*-AR-A4001N1-*.*" "$BCM63xx_BCMA"
+	build_firmware "brcm63xx" "A4001N" "openwrt-*-A4001N-*.*" "$BCM63xx_BCMA"
+	build_firmware "brcm63xx" "A4001N1" "openwrt-*-A4001N1-*.*" "$BCM63xx_BCMA"
 	build_firmware "brcm63xx" "AR5381u" "openwrt-*-AR-5381u*.*" "$BCM63xx_BCMA"
 	build_firmware "brcm63xx" "AR5387un" "openwrt-*-AR-5387un*.*" "$BCM63xx_BCMA"
 	build_firmware "brcm63xx" "CT5365" "openwrt-*-CT-5365*.*" "$BCM63xx_SSB"
