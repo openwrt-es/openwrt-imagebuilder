@@ -14,7 +14,7 @@ SDK_DIR="$WS_DIR/sdk"
 IB_DIR=""
 
 RM_BIN=1
-RM_IB=0
+RM_IB=1
 RM_IB_TAR=0
 RM_IB_BIN=1
 
@@ -49,6 +49,13 @@ function build_firmware() {
 	cp $firmwares $BIN_DIR/$target/
 }
 
+function patch_imagebuilder() {
+	local patch_file="$1"
+
+	cd $IB_DIR
+	patch -p1 -i $patch_file
+}
+
 function prepare_imagebuilder() {
 	local target_url="$1"
 	local target_ib="$2"
@@ -74,8 +81,7 @@ function prepare_imagebuilder() {
 		rm -rf $image_builder_tar
 	fi
 	if [ ! -f $image_builder_tar ]; then
-		echo "Downloading $image_builder_tar from $url"
-		curl --insecure -o $image_builder_tar $url
+		$(download_file $image_builder_tar $url)
 	fi
 
 	if [ $RM_IB -eq 1 ]; then
@@ -83,6 +89,17 @@ function prepare_imagebuilder() {
 	fi
 	if [ ! -d $IB_DIR ]; then
 		tar -jxvf $image_builder_tar -C $SDK_DIR
+	fi
+}
+
+function download_file() {
+	local file_name="$1"
+	local file_url="$2"
+	local file_force="${3:-0}"
+
+	if [ ! -f "$file_name" ] || [ $file_force -eq 1 ]; then
+		rm -f $file_name
+		curl --insecure -o $file_name $file_url
 	fi
 }
 
