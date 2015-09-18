@@ -3,11 +3,12 @@
 . lib/ib.sh
 
 BCM63xx_SSB="-kmod-b43 -wpad-mini kmod-brcm-wl nas wlc"
+BCM63xx_Kernels="vmlinux-wap-5813n.lzma.cfe"
 
 function cc_brcm63xx_fixes() {
 	# Align kernels to 2 bytes blocks
 	cd $IB_DIR/build_dir/target-mips_mips32_uClibc-0.9.33.2/$1
-	for file in *.lzma.cfe; do
+	for file in $BCM63xx_Kernels; do
 		dd if=$file of=$file.sync bs=2 conv=sync,noerror
 		mv $file.sync $file
 	done

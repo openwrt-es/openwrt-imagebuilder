@@ -4,11 +4,28 @@
 
 BCM63xx_BCMA="-kmod-b43 kmod-brcmsmac"
 BCM63xx_SSB="-kmod-b43 -wpad-mini kmod-brcm-wl nas wlc"
+BCM63xx_Kernels="vmlinux-a4001n.lzma.cfe \
+	vmlinux-a4001n1.lzma.cfe \
+	vmlinux-ar-5381u.lzma.cfe \
+	vmlinux-ar-5387un.lzma.cfe \
+	vmlinux-ct-5365.lzma.cfe \
+	vmlinux-ct-6373.lzma.cfe \
+	vmlinux-fast2604.lzma.cfe \
+	vmlinux-hg520v.lzma.cfe \
+	vmlinux-hg553.lzma.cfe \
+	vmlinux-hg556a-a.lzma.cfe \
+	vmlinux-hg556a-b.lzma.cfe \
+	vmlinux-hg556a-c.lzma.cfe \
+	vmlinux-hg655b.lzma.cfe \
+	vmlinux-p870hw-51a-v2.lzma.cfe \
+	vmlinux-vr-3025u.lzma.cfe \
+	vmlinux-vr-3025un.lzma.cfe \
+	vmlinux-wap-5813n.lzma.cfe"
 
 function cc_brcm63xx_fixes() {
 	# Align kernels to 2 bytes blocks
 	cd $IB_DIR/build_dir/target-mips_mips32_uClibc-0.9.33.2/$1
-	for file in *.lzma.cfe; do
+	for file in $BCM63xx_Kernels; do
 		dd if=$file of=$file.sync bs=2 conv=sync,noerror
 		mv $file.sync $file
 	done
