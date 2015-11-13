@@ -31,7 +31,7 @@ function cc_brcm63xx_fixes() {
 	done
 }
 function cc_lantiq_xrx200_fixes() {
-	download_file "$WS_DIR/lantiq_arv7519rw22.patch" "https://github.com/openwrt-es/openwrt/commit/5c227591fc3bc2e7a06e92566b94d632c282dee3.patch"
+	download_file "$WS_DIR/lantiq_arv7519rw22.patch" "https://github.com/openwrt-es/openwrt/commit/b67a4f8ea0d63e1190fb2ffccfa10ac190c0303a.patch"
 	patch_imagebuilder "$WS_DIR/lantiq_arv7519rw22.patch"
 
 	local script_dir="$WS_DIR/files_lantiq_xrx200/etc/uci-defaults"
