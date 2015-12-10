@@ -14,12 +14,10 @@ function build_cc() {
 
 function build_trunk() {
 	prepare_imagebuilder "brcm2708/generic" "brcm2708-bcm2708"
-	build_firmware "brcm2708" "RaspberryPi_B" "openwrt-*-rpi-b*.*"
-	build_firmware "brcm2708" "RaspberryPi_BPlus" "openwrt-*-rpi-b-plus*.*"
-	build_firmware "brcm2708" "RaspberryPi_CM" "openwrt-*-cm*.*"
+	build_firmware "brcm2708" "RaspberryPi" "openwrt-*-rpi*.*"
 
 #	prepare_imagebuilder "brcm2708/bcm2709" "brcm2708-bcm2709"
-#	build_firmware "brcm2708" "RaspberryPi_2" "openwrt-*-rpi-2-b*.*"
+#	build_firmware "brcm2708" "RaspberryPi_2" "openwrt-*-rpi-2*.*"
 }
 
 function main() {
