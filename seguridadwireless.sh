@@ -32,7 +32,9 @@ function cc_brcm63xx_fixes() {
 }
 function cc_lantiq_xrx200_fixes() {
 	download_file "$WS_DIR/lantiq_arv7519rw22.patch" "https://github.com/openwrt-es/openwrt/commit/b67a4f8ea0d63e1190fb2ffccfa10ac190c0303a.patch"
+	download_file "$WS_DIR/lantiq_arv7519rw22_buttons.patch" "https://github.com/openwrt-es/openwrt/commit/6f8f11b7a16b494bbd068830b5e55544a7f20b3b.patch"
 	patch_imagebuilder "$WS_DIR/lantiq_arv7519rw22.patch"
+	patch_imagebuilder "$WS_DIR/lantiq_arv7519rw22_buttons.patch"
 
 	local script_dir="$WS_DIR/files_lantiq_xrx200/etc/uci-defaults"
 	local script_leds="01_leds"
