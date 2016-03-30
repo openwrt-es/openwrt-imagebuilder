@@ -3,7 +3,7 @@
 . lib/ib.sh
 
 function main() {
-	release_version "chaos_calmer" "15.05"
+	release_version "chaos_calmer" "15.05.1"
 	firmware_packages "luci luci-proto-ipv6"
 
 	prepare_imagebuilder "ar71xx/generic" "ar71xx-generic"

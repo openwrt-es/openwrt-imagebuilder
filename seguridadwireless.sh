@@ -23,29 +23,16 @@ BCM63xx_Kernels="vmlinux-a4001n.lzma.cfe \
 	vmlinux-wap-5813n.lzma.cfe"
 
 function cc_brcm63xx_fixes() {
-	# Align kernels to 2 bytes blocks
+	# Align kernels to 4 bytes blocks
 	cd $IB_DIR/build_dir/target-mips_mips32_uClibc-0.9.33.2/$1
 	for file in $BCM63xx_Kernels; do
-		dd if=$file of=$file.sync bs=2 conv=sync,noerror
+		dd if=$file of=$file.sync bs=4 conv=sync,noerror
 		mv $file.sync $file
 	done
 }
-function cc_lantiq_xrx200_fixes() {
-	download_file "$WS_DIR/lantiq_arv7519rw22.patch" "https://github.com/openwrt-es/openwrt/commit/b67a4f8ea0d63e1190fb2ffccfa10ac190c0303a.patch"
-	download_file "$WS_DIR/lantiq_arv7519rw22_buttons.patch" "https://github.com/openwrt-es/openwrt/commit/6f8f11b7a16b494bbd068830b5e55544a7f20b3b.patch"
-	patch_imagebuilder "$WS_DIR/lantiq_arv7519rw22.patch"
-	patch_imagebuilder "$WS_DIR/lantiq_arv7519rw22_buttons.patch"
-
-	local script_dir="$WS_DIR/files_lantiq_xrx200/etc/uci-defaults"
-	local script_leds="01_leds"
-	local script_network="02_network"
-	[ ! -d "$script_dir" ] && mkdir -p "$script_dir"
-	cp $IB_DIR/target/linux/lantiq/base-files/etc/uci-defaults/$script_leds $script_dir/$script_leds
-	cp $IB_DIR/target/linux/lantiq/base-files/etc/uci-defaults/$script_network $script_dir/$script_network
-}
 
 function main() {
-	release_version "chaos_calmer" "15.05"
+	release_version "chaos_calmer" "15.05.1"
 	firmware_packages "luci luci-proto-ipv6"
 
 	prepare_imagebuilder "brcm63xx/generic" "brcm63xx-generic"
@@ -82,8 +69,7 @@ function main() {
 	build_firmware "lantiq" "ARV7518PW" "openwrt-*-ARV7518PW*.*"
 
 	prepare_imagebuilder "lantiq/xrx200" "lantiq-xrx200"
-	cc_lantiq_xrx200_fixes
-	build_firmware "lantiq" "ARV7519RW22" "openwrt-*-ARV7519RW22*squashfs.*" "" "$WS_DIR/files_lantiq_xrx200"
+	build_firmware "lantiq" "ARV7519RW22" "openwrt-*-ARV7519RW22*squashfs.*"
 
 	prepare_imagebuilder "ramips/rt305x" "ramips-rt305x"
 	build_firmware "ramips" "ASL26555" "openwrt-*-asl26555*.*"

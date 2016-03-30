@@ -3,7 +3,7 @@
 . lib/ib.sh
 
 function build_cc() {
-	release_version "chaos_calmer" "15.05"
+	release_version "chaos_calmer" "15.05.1"
 
 	prepare_imagebuilder "brcm2708/bcm2708" "brcm2708-bcm2708"
 	build_firmware "brcm2708" "RaspberryPi" "openwrt-*-bcm2708*.*"
@@ -18,6 +18,9 @@ function build_trunk() {
 
 #	prepare_imagebuilder "brcm2708/bcm2709" "brcm2708-bcm2709"
 #	build_firmware "brcm2708" "RaspberryPi_2" "openwrt-*-rpi-2*.*"
+
+#       prepare_imagebuilder "brcm2708/bcm2710" "brcm2708-bcm2710"
+#       build_firmware "brcm2708" "RaspberryPi_3" "openwrt-*-rpi-3*.*"
 }
 
 function main() {

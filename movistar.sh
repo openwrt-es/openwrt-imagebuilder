@@ -6,10 +6,10 @@ BCM63xx_SSB="-kmod-b43 -wpad-mini kmod-brcm-wl nas wlc"
 BCM63xx_Kernels="vmlinux-wap-5813n.lzma.cfe"
 
 function cc_brcm63xx_fixes() {
-	# Align kernels to 2 bytes blocks
+	# Align kernels to 4 bytes blocks
 	cd $IB_DIR/build_dir/target-mips_mips32_uClibc-0.9.33.2/$1
 	for file in $BCM63xx_Kernels; do
-		dd if=$file of=$file.sync bs=2 conv=sync,noerror
+		dd if=$file of=$file.sync bs=4 conv=sync,noerror
 		mv $file.sync $file
 	done
 }
@@ -25,7 +25,7 @@ function movistar_ftth() {
 function main() {
 	movistar_ftth "$CW_DIR/files_movistar"
 
-	release_version "chaos_calmer" "15.05"
+	release_version "chaos_calmer" "15.05.1"
 	firmware_packages "kmod-bridge kmod-ipt-nathelper-rtsp bird4 mcproxy miniupnpd udpxy xupnpd luci luci-app-ddns luci-app-udpxy luci-app-upnp luci-proto-ipv6"
 	firmware_files "$CW_DIR/files_movistar/"
 
