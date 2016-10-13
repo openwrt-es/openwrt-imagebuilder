@@ -1,7 +1,6 @@
 #!/bin/bash
 
 . lib/ib.sh
-RM_IB_TAR=1
 
 function main() {
 	release_version "snapshots"
