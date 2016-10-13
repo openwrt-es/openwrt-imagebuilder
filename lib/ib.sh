@@ -55,8 +55,8 @@ function patch_imagebuilder() {
 }
 
 function prepare_imagebuilder() {
-	local target_url="$1"
-	local target_ib="$2"
+	local target_url="$1/$2"
+	local target_ib="$1-$2"
 	local ib_name=""
 	local image_builder=""
 	local image_builder_tar=""
