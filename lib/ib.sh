@@ -1,8 +1,7 @@
 #!/bin/bash
 
 FW_RELEASE="snapshots"
-FW_VERSION="trunk"
-FW_URL="https://downloads.openwrt.org"
+FW_URL="https://downloads.lede-project.org"
 FW_PACKAGES=""
 
 FW_FILES=""
@@ -20,7 +19,6 @@ RM_IB_BIN=1
 
 function release_version() {
 	FW_RELEASE="$1"
-	FW_VERSION="$2"
 }
 
 function firmware_packages() {
@@ -44,7 +42,7 @@ function build_firmware() {
 
 	make image PROFILE="$profile" PACKAGES="$packages" FILES="$files"
 
-	cd $IB_DIR/bin/$target
+	cd $IB_DIR/bin/targets/$target
 	mkdir -p $BIN_DIR/$target
 	cp $firmwares $BIN_DIR/$target/
 }
@@ -66,14 +64,10 @@ function prepare_imagebuilder() {
 
 	cd $WS_DIR
 
-	if [ "$FW_VERSION" != "trunk" ]; then
-		ib_name="${FW_VERSION}-"
-	fi
 	ib_name="${ib_name}${target_ib}"
-
-	image_builder="OpenWrt-ImageBuilder-${ib_name}.Linux-x86_64"
+	image_builder="lede-imagebuilder-${ib_name}.Linux-x86_64"
 	image_builder_tar="${image_builder}.tar.bz2"
-	url="${FW_URL}/${FW_RELEASE}/${FW_VERSION}/${target_url}/${image_builder_tar}"
+	url="${FW_URL}/${FW_RELEASE}/targets/${target_url}/${image_builder_tar}"
 	image_builder_tar="${DL_DIR}/${image_builder_tar}"
 	IB_DIR="${SDK_DIR}/$image_builder"
 
