@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FW_RELEASE="snapshots"
-FW_URL="https://downloads.lede-project.org"
+FW_URL="https://downloads.openwrt.org"
 FW_PACKAGES=""
 
 FW_FILES=""
@@ -16,6 +16,9 @@ RM_BIN=1
 RM_IB=1
 RM_IB_TAR=0
 RM_IB_BIN=1
+
+TAR_EXT="tar.xz"
+TAR_CMD="tar -Jxvf"
 
 function release_version() {
 	FW_RELEASE="$1"
@@ -61,13 +64,21 @@ function prepare_imagebuilder() {
 	local image_builder=""
 	local image_builder_tar=""
 	local url=""
+	local url_pfx=""
 
 	cd $WS_DIR
 
+	if [ $FW_RELEASE = "snapshots" ]; then
+		url_pfx="${FW_URL}/${FW_RELEASE}"
+	else
+		url_pfx="${FW_URL}/releases/${FW_RELEASE}"
+		ib_name="${FW_RELEASE}-"
+	fi
+
 	ib_name="${ib_name}${target_ib}"
-	image_builder="lede-imagebuilder-${ib_name}.Linux-x86_64"
-	image_builder_tar="${image_builder}.tar.bz2"
-	url="${FW_URL}/${FW_RELEASE}/targets/${target_url}/${image_builder_tar}"
+	image_builder="openwrt-imagebuilder-${ib_name}.Linux-x86_64"
+	image_builder_tar="${image_builder}.${TAR_EXT}"
+	url="${url_pfx}/targets/${target_url}/${image_builder_tar}"
 	image_builder_tar="${DL_DIR}/${image_builder_tar}"
 	IB_DIR="${SDK_DIR}/$image_builder"
 
@@ -82,7 +93,7 @@ function prepare_imagebuilder() {
 		rm -rf $IB_DIR
 	fi
 	if [ ! -d $IB_DIR ]; then
-		tar -jxvf $image_builder_tar -C $SDK_DIR
+		$TAR_CMD $image_builder_tar -C $SDK_DIR
 	fi
 }
 
@@ -101,14 +112,11 @@ function generate_checksums() {
 	local target_dir="$BIN_DIR/$1"
 
 	if [ -d $target_dir ]; then
-		local tmp_md5sums="/tmp/$1_md5sums"
-		local tmp_sha256sums="/tmp/$1_sha256sums"
+		local tmp_sha256sums="/tmp/$(echo $1 | tr '/' '_')_sha256sums"
 
 		cd $target_dir
-		rm -f md5sums sha256sums
-		md5sum * > $tmp_md5sums
+		rm -f sha256sums
 		sha256sum * > $tmp_sha256sums
-		mv $tmp_md5sums ./md5sums
 		mv $tmp_sha256sums ./sha256sums
 	fi
 }
