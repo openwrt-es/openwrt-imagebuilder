@@ -1,0 +1,8 @@
+#!/bin/sh /etc/rc.common
+
+START=15
+
+boot() {
+	echo 1 > /sys/class/net/eth0/queues/rx-0/rps_cpus
+	echo 2 > /sys/class/net/eth1/queues/rx-0/rps_cpus
+}
