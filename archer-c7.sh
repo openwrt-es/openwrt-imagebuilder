@@ -3,12 +3,11 @@
 . lib/ib.sh
 
 function main() {
-	release_version "snapshots"
-	firmware_packages "luci luci-proto-ipv6"
+	release_version "21.02-SNAPSHOT"
+	firmware_packages "luci"
 
-	prepare_imagebuilder "ar71xx" "generic"
-	build_firmware "ar71xx/generic" "archer-c7-v1" "openwrt-*-archer-c7-v1*.*"
-	build_firmware "ar71xx/generic" "archer-c7-v2" "openwrt-*-archer-c7-v2*.*"
+	prepare_imagebuilder "ath79" "generic"
+	build_firmware "ath79/generic" "tplink_archer-c7-v2" "openwrt-*-tplink_archer-c7-v2*.*"
 }
 
 main
