@@ -5,6 +5,7 @@
 function main() {
 	release_version "snapshots"
 	firmware_packages "bcm27xx-userland bird2 qrencode \
+		irqbalance htop \
 		kmod-hwmon-gpiofan kmod-hwmon-pwmfan kmod-usb-net-rtl8152 \
 		luci luci-app-ddns luci-app-sqm luci-app-upnp luci-app-wireguard"
 	firmware_files "files/rpi-router"
