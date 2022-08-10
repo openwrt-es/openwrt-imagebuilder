@@ -3,7 +3,7 @@
 . lib/ib.sh
 
 function main() {
-	release_version "21.02-SNAPSHOT"
+	release_version "22.03.0-rc6"
 	firmware_packages "luci luci-app-ddns"
 
 	prepare_imagebuilder "ath79" "generic"
