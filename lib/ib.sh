@@ -56,7 +56,16 @@ function build_firmware() {
 	[ ! -z "$FW_KERNEL_PARTSIZE" ] && sed -i "s/CONFIG_TARGET_KERNEL_PARTSIZE=.*/CONFIG_TARGET_KERNEL_PARTSIZE=$FW_KERNEL_PARTSIZE/g" .config
 	[ ! -z "$FW_ROOTFS_PARTSIZE" ] && sed -i "s/CONFIG_TARGET_ROOTFS_PARTSIZE=.*/CONFIG_TARGET_ROOTFS_PARTSIZE=$FW_ROOTFS_PARTSIZE/g" .config
 
-	make image PROFILE="$profile" PACKAGES="$packages" FILES="$files"
+	rm -rf $IB_DIR/files
+	mkdir -p $IB_DIR/files
+	for file_dir in $files; do
+		case $file_dir in
+			/*) cp -r $file_dir/* $IB_DIR/files/ ;;
+			*) cp -r $WS_DIR/$file_dir/* $IB_DIR/files/ ;;
+		esac
+	done
+
+	make image PROFILE="$profile" PACKAGES="$packages" FILES="$IB_DIR/files"
 
 	cd $IB_DIR/bin/targets/$target
 	mkdir -p $BIN_DIR/$target
