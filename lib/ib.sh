@@ -5,6 +5,8 @@ FW_URL="https://downloads.openwrt.org"
 FW_PACKAGES=""
 
 FW_FILES=""
+FW_KERNEL_PARTSIZE=""
+FW_ROOTFS_PARTSIZE=""
 CW_DIR="$(pwd)"
 WS_DIR="${WS_DIR:-$CW_DIR}"
 DL_DIR="$WS_DIR/dl"
@@ -32,6 +34,14 @@ function firmware_files() {
 	FW_FILES="$1"
 }
 
+function firmware_kernel_partsize() {
+	FW_KERNEL_PARTSIZE="$1"
+}
+
+function firmware_rootfs_partsize() {
+	FW_ROOTFS_PARTSIZE="$1"
+}
+
 function build_firmware() {
 	local target="$1"
 	local profile="$2"
@@ -42,6 +52,9 @@ function build_firmware() {
 	cd $IB_DIR
 
 	[ $RM_IB_BIN -eq 1 ] && rm -rf $IB_DIR/bin
+
+	[ ! -z "$FW_KERNEL_PARTSIZE" ] && sed -i "s/CONFIG_TARGET_KERNEL_PARTSIZE=.*/CONFIG_TARGET_KERNEL_PARTSIZE=$FW_KERNEL_PARTSIZE/g" .config
+	[ ! -z "$FW_ROOTFS_PARTSIZE" ] && sed -i "s/CONFIG_TARGET_ROOTFS_PARTSIZE=.*/CONFIG_TARGET_ROOTFS_PARTSIZE=$FW_ROOTFS_PARTSIZE/g" .config
 
 	make image PROFILE="$profile" PACKAGES="$packages" FILES="$files"
 
