@@ -3,6 +3,7 @@
 FW_RELEASE="snapshots"
 FW_URL="https://downloads.openwrt.org"
 FW_PACKAGES=""
+CUSTOM_PACKAGES=""
 
 FW_FILES=""
 FW_KERNEL_PARTSIZE=""
@@ -30,6 +31,10 @@ function firmware_packages() {
 	FW_PACKAGES="$1"
 }
 
+function custom_packages() {
+	CUSTOM_PACKAGES="$1"
+}
+
 function firmware_files() {
 	FW_FILES="$1"
 }
@@ -48,6 +53,7 @@ function build_firmware() {
 	local firmwares="$3"
 	local packages="$FW_PACKAGES $4"
 	local files=$(echo "$FW_FILES $5" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+	local custom_packages=$(echo "$CUSTOM_PACKAGES $6" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
 
 	cd $IB_DIR
 
@@ -62,6 +68,13 @@ function build_firmware() {
 		case $file_dir in
 			/*) cp -r $file_dir/* $IB_DIR/files/ ;;
 			*) cp -r $WS_DIR/$file_dir/* $IB_DIR/files/ ;;
+		esac
+	done
+
+	for cus_pkg in $custom_packages; do
+		case $cus_pkg in
+			/*) cp -r $cus_pkg $IB_DIR/packages/ ;;
+			*) cp -r $WS_DIR/$cus_pkg $IB_DIR/packages/ ;;
 		esac
 	done
 
