@@ -5,7 +5,7 @@
 function main() {
 	release_version "snapshots"
 	firmware_packages "bcm27xx-userland bird2 qrencode \
-		irqbalance htop \
+		irqbalance htop mosquitto-client-nossl \
 		kmod-hwmon-gpiofan kmod-hwmon-pwmfan \
 		ethtool kmod-usb-net-rtl8152 usbutils \
 		luci luci-app-ddns luci-app-sqm luci-app-upnp luci-app-wireguard"
