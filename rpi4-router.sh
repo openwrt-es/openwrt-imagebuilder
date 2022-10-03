@@ -8,7 +8,8 @@ function main() {
 		irqbalance htop mosquitto-client-nossl \
 		kmod-hwmon-gpiofan kmod-hwmon-pwmfan \
 		ethtool kmod-usb-net-rtl8152 usbutils \
-		luci luci-app-ddns luci-app-sqm luci-app-upnp luci-app-wireguard"
+		luci luci-app-sqm luci-app-upnp luci-app-wireguard \
+		luci-app-ddns wget-ssl drill"
 	firmware_files "files/rpi-router"
 
 	prepare_imagebuilder "bcm27xx" "bcm2711"
