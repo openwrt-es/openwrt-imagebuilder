@@ -3,7 +3,7 @@
 . lib/ib.sh
 
 function main() {
-	release_version "22.03.0"
+	release_version "22.03.1"
 	firmware_packages "ath10k-firmware-qca9984-ct-full-htt bird2 qrencode \
 		luci luci-app-sqm luci-app-upnp luci-app-wireguard \
 		luci-app-ddns wget-ssl drill"
