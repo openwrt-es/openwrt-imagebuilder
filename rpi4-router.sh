@@ -3,7 +3,7 @@
 . lib/ib.sh
 
 function main() {
-	release_version "snapshots"
+	release_version "23.05.2"
 	firmware_packages "bcm27xx-userland bird2 qrencode \
 		irqbalance htop mosquitto-client-nossl \
 		kmod-hwmon-gpiofan kmod-hwmon-pwmfan \
