@@ -1,0 +1,8 @@
+#!/bin/sh /etc/rc.common
+
+START=15
+
+boot() {
+	echo 2 > /proc/irq/39/smp_affinity
+	echo 2 > /proc/irq/40/smp_affinity
+}
