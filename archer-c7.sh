@@ -3,7 +3,7 @@
 . lib/ib.sh
 
 function main() {
-	release_version "22.03.2"
+	release_version "23.05.2"
 	firmware_packages "luci"
 
 	prepare_imagebuilder "ath79" "generic"
