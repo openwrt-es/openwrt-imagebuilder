@@ -10,7 +10,7 @@ function main() {
 		ethtool kmod-usb-net-rtl8152 usbutils \
 		luci luci-app-sqm luci-app-upnp luci-app-wireguard \
 		luci-app-ddns wget-ssl drill"
-	firmware_files "files/rpi-router"
+	firmware_files "files/rpi4-router"
 
 	prepare_imagebuilder "bcm27xx" "bcm2711"
 	build_firmware "bcm27xx/bcm2711" "rpi-4" "openwrt-*-rpi-4*.*"
