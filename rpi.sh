@@ -17,6 +17,9 @@ function main() {
 
 	prepare_imagebuilder "bcm27xx" "bcm2711"
 	build_firmware "bcm27xx/bcm2711" "rpi-4" "openwrt-*-rpi-4*.*"
+
+	prepare_imagebuilder "bcm27xx" "bcm2712"
+	build_firmware "bcm27xx/bcm2712" "rpi-5" "openwrt-*-rpi-5*.*"
 }
 
 main
