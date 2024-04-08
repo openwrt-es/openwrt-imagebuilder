@@ -3,6 +3,7 @@
 START=15
 
 boot() {
-	echo 8 > /sys/class/net/eth1/queues/rx-0/rps_cpus
-	echo 4 > /sys/class/net/eth0/queues/rx-0/rps_cpus
+	echo 8 > /proc/irq/103/smp_affinity
+	echo 4 > /proc/irq/133/smp_affinity
+	echo 2 > /proc/irq/128/smp_affinity
 }
