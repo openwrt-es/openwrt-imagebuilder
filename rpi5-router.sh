@@ -8,7 +8,7 @@ function main() {
 		irqbalance htop mosquitto-client-nossl \
 		ethtool kmod-r8169 \
 		kmod-usb-net-asix-ax88179 kmod-usb-net-rtl8152 usbutils \
-		luci luci-app-sqm luci-app-upnp luci-app-wireguard \
+		luci luci-app-sqm luci-app-upnp luci-proto-wireguard \
 		luci-app-ddns wget-ssl drill"
 	firmware_files "files/rpi5-router"
 
