@@ -3,6 +3,7 @@
 . lib/ib.sh
 
 function main() {
+	release_tar_zst
 	release_version "snapshots"
 	firmware_packages "bird2 qrencode \
 		irqbalance htop mosquitto-client-nossl \

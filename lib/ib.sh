@@ -23,6 +23,11 @@ RM_IB_BIN=1
 TAR_EXT="tar.xz"
 TAR_CMD="tar -Jxvf"
 
+function release_tar_zst() {
+	TAR_EXT="tar.zst"
+	TAR_CMD="tar --zstd -xvf"
+}
+
 function release_version() {
 	FW_RELEASE="$1"
 }
