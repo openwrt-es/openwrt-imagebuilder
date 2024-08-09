@@ -12,13 +12,19 @@ CW_DIR="$(pwd)"
 WS_DIR="${WS_DIR:-$CW_DIR}"
 DL_DIR="$WS_DIR/dl"
 BIN_DIR="$WS_DIR/bin"
-SDK_DIR="$WS_DIR/sdk"
+ENV_DIR="$WS_DIR/env"
 IB_DIR=""
+SDK_DIR=""
+SRC_PKG_DIR="$WS_DIR/packages"
+SRC_KERNEL_PKG_DIR="$SRC_PKG_DIR/kernel"
 
 RM_BIN=1
 RM_IB=1
 RM_IB_TAR=0
 RM_IB_BIN=1
+RM_SDK=1
+RM_SDK_TAR=0
+RM_SDK_BIN=1
 
 TAR_EXT="tar.xz"
 TAR_CMD="tar -Jxvf"
@@ -90,6 +96,36 @@ function build_firmware() {
 	cp $firmwares $BIN_DIR/$target/
 }
 
+function build_sdk_packages() {
+	local target="$1"
+	local profile="$2"
+	local kernel_packages="$3"
+	local bin_pkg_dir="$BIN_DIR/$target/packages"
+	local ib_src_pkg_dir="$IB_DIR/packages"
+	local sdk_bin_pkg_dir="$SDK_DIR/bin/targets/$target/packages"
+	local sdk_src_pkg_dir="$SDK_DIR/package/kernel"
+
+	cd $SDK_DIR
+
+	[ $RM_SDK_BIN -eq 1 ] && rm -rf $SDK_DIR/bin
+
+	for kernel_package in $kernel_packages; do
+		cp -r $SRC_KERNEL_PKG_DIR/$kernel_package $sdk_src_pkg_dir
+	done
+
+	make defconfig V=s
+
+	mkdir -p $bin_pkg_dir
+	for kernel_package in $kernel_packages; do
+		local pkg_ipk="$sdk_bin_pkg_dir/kmod-${kernel_package}_*.ipk"
+
+		make package/$kernel_package/compile V=s
+
+		cp $pkg_ipk $bin_pkg_dir
+		cp $pkg_ipk $ib_src_pkg_dir
+	done
+}
+
 function patch_imagebuilder() {
 	local patch_file="$1"
 
@@ -101,8 +137,8 @@ function prepare_imagebuilder() {
 	local target_url="$1/$2"
 	local target_ib="$1-$2"
 	local ib_name=""
-	local image_builder=""
-	local image_builder_tar=""
+	local openwrt_ib=""
+	local openwrt_ib_tar=""
 	local url=""
 	local url_pfx=""
 
@@ -116,24 +152,65 @@ function prepare_imagebuilder() {
 	fi
 
 	ib_name="${ib_name}${target_ib}"
-	image_builder="openwrt-imagebuilder-${ib_name}.Linux-x86_64"
-	image_builder_tar="${image_builder}.${TAR_EXT}"
-	url="${url_pfx}/targets/${target_url}/${image_builder_tar}"
-	image_builder_tar="${DL_DIR}/${image_builder_tar}"
-	IB_DIR="${SDK_DIR}/$image_builder"
+	openwrt_ib="openwrt-imagebuilder-${ib_name}.Linux-x86_64"
+	openwrt_ib_tar="${openwrt_ib}.${TAR_EXT}"
+	url="${url_pfx}/targets/${target_url}/${openwrt_ib_tar}"
+	openwrt_ib_tar="${DL_DIR}/${openwrt_ib_tar}"
+	IB_DIR="${ENV_DIR}/$openwrt_ib"
 
 	if [ $RM_IB_TAR -eq 1 ]; then
-		rm -rf $image_builder_tar
+		rm -rf $openwrt_ib_tar
 	fi
-	if [ ! -f $image_builder_tar ]; then
-		$(download_file $image_builder_tar $url)
+	if [ ! -f $openwrt_ib_tar ]; then
+		$(download_file $openwrt_ib_tar $url)
 	fi
 
 	if [ $RM_IB -eq 1 ]; then
 		rm -rf $IB_DIR
 	fi
 	if [ ! -d $IB_DIR ]; then
-		$TAR_CMD $image_builder_tar -C $SDK_DIR
+		$TAR_CMD $openwrt_ib_tar -C $ENV_DIR
+	fi
+}
+
+function prepare_sdk() {
+	local target_url="$1/$2"
+	local target_ib="$1-$2"
+	local target_gcc="$3"
+	local sdk_name=""
+	local openwrt_sdk=""
+	local openwrt_sdk_tar=""
+	local url=""
+	local url_pfx=""
+
+	cd $WS_DIR
+
+	if [ $FW_RELEASE = "snapshots" ]; then
+		url_pfx="${FW_URL}/${FW_RELEASE}"
+	else
+		url_pfx="${FW_URL}/releases/${FW_RELEASE}"
+		sdk_name="${FW_RELEASE}-"
+	fi
+
+	sdk_name="${sdk_name}${target_ib}"
+	openwrt_sdk="openwrt-sdk-${sdk_name}_${target_gcc}.Linux-x86_64"
+	openwrt_sdk_tar="${openwrt_sdk}.${TAR_EXT}"
+	url="${url_pfx}/targets/${target_url}/${openwrt_sdk_tar}"
+	openwrt_sdk_tar="${DL_DIR}/${openwrt_sdk_tar}"
+	SDK_DIR="${ENV_DIR}/$openwrt_sdk"
+
+	if [ $RM_SDK_TAR -eq 1 ]; then
+		rm -rf $openwrt_sdk_tar
+	fi
+	if [ ! -f $openwrt_sdk_tar ]; then
+		$(download_file $openwrt_sdk_tar $url)
+	fi
+
+	if [ $RM_SDK -eq 1 ]; then
+		rm -rf $SDK_DIR
+	fi
+	if [ ! -d $SDK_DIR ]; then
+		$TAR_CMD $openwrt_sdk_tar -C $ENV_DIR
 	fi
 }
 
@@ -166,7 +243,7 @@ function setup_workspace() {
 
 	mkdir -p $WS_DIR
 	mkdir -p $DL_DIR
-	mkdir -p $SDK_DIR
+	mkdir -p $ENV_DIR
 	mkdir -p $BIN_DIR
 }
 
