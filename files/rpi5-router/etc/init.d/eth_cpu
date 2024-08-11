@@ -1,15 +1,33 @@
 #!/bin/sh /etc/rc.common
 
-START=15
+START=25
 
 boot() {
+	eth_cpu_affinity
+}
+
+start() {
+	eth_cpu_affinity
+}
+
+eth_cpu_affinity() {
 	if [ -f "/proc/irq/104/smp_affinity" ]; then
-		echo 8 > /proc/irq/104/smp_affinity
-		echo 4 > /proc/irq/129/smp_affinity
-		echo 2 > /proc/irq/134/smp_affinity
-	else
-		echo 8 > /proc/irq/103/smp_affinity
-		echo 4 > /proc/irq/128/smp_affinity
-		echo 2 > /proc/irq/133/smp_affinity
+		irq_off=2
+	elif [ -f "/proc/irq/103/smp_affinity" ]; then
+		irq_off=1
+	elif [ -f "/proc/irq/102/smp_affinity" ]; then
+		irq_off=0
+	fi
+
+	if [ ! -z "$irq_off" ]; then
+		eth0_irq=$((irq_off + 102))
+		usb1_irq=$((irq_off + 127))
+		usb3_irq=$((irq_off + 132))
+		eth1_irq=$((irq_off + 157))
+
+		echo 8 > /proc/irq/$eth0_irq/smp_affinity
+		echo 4 > /proc/irq/$usb1_irq/smp_affinity
+		echo 4 > /proc/irq/$usb3_irq/smp_affinity
+		echo 2 > /proc/irq/$eth1_irq/smp_affinity
 	fi
 }
