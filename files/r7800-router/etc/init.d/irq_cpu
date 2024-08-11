@@ -1,8 +1,18 @@
 #!/bin/sh /etc/rc.common
 
-START=15
+START=25
 
 boot() {
-	echo 2 > /proc/irq/39/smp_affinity
+	eth_cpu_affinity
+}
+
+start() {
+	eth_cpu_affinity
+}
+
+eth_cpu_affinity() {
+	# eth0
+	echo 1 > /proc/irq/39/smp_affinity
+	# eth1
 	echo 2 > /proc/irq/40/smp_affinity
 }
