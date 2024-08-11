@@ -1,8 +1,16 @@
 #!/bin/sh /etc/rc.common
 
-START=15
+START=25
 
 boot() {
+	eth_cpu_affinity
+}
+
+start() {
+	eth_cpu_affinity
+}
+
+eth_cpu_affinity() {
 	echo 8 > /sys/class/net/eth1/queues/rx-0/rps_cpus
 	echo 4 > /proc/irq/35/smp_affinity
 	echo 2 > /proc/irq/36/smp_affinity
