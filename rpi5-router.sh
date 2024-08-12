@@ -6,7 +6,7 @@ function main() {
 	release_tar_zst
 	release_version "snapshots"
 	firmware_packages "bird2 qrencode \
-		irqbalance htop mosquitto-client-nossl \
+		irqbalance btop htop mosquitto-client-nossl \
 		ethtool kmod-r8169 \
 		kmod-usb-net-asix-ax88179 kmod-usb-net-rtl8152 usbutils \
 		luci luci-app-sqm luci-app-upnp luci-proto-wireguard \
