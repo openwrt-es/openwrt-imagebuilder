@@ -3,8 +3,11 @@
 . lib/ib.sh
 
 function main() {
+	disable_signature_check
+
 	release_tar_zst
-	release_version "snapshots"
+	release_version "24.10-SNAPSHOT"
+
 	firmware_packages "bird2 qrencode \
 		irqbalance btop htop mosquitto-client-nossl \
 		ethtool kmod-r8168 kmod-r8125 kmod-r8126 \
