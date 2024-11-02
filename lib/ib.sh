@@ -25,9 +25,14 @@ RM_IB_BIN=1
 RM_SDK=1
 RM_SDK_TAR=0
 RM_SDK_BIN=1
+SIGN_CHECK=1
 
 TAR_EXT="tar.xz"
 TAR_CMD="tar -Jxvf"
+
+function disable_signature_check() {
+	SIGN_CHECK=0
+}
 
 function release_tar_zst() {
 	TAR_EXT="tar.zst"
@@ -170,6 +175,11 @@ function prepare_imagebuilder() {
 	fi
 	if [ ! -d $IB_DIR ]; then
 		$TAR_CMD $openwrt_ib_tar -C $ENV_DIR
+	fi
+
+	if [ $SIGN_CHECK -ne 1 ]; then
+		cat $IB_DIR/repositories.conf
+		sed -i 's/option check_signature/# option check_signature/' $IB_DIR/repositories.conf
 	fi
 }
 
