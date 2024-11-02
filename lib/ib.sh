@@ -27,16 +27,22 @@ RM_SDK_TAR=0
 RM_SDK_BIN=1
 SIGN_CHECK=1
 
-TAR_EXT="tar.xz"
-TAR_CMD="tar -Jxvf"
+TAR_EXT=""
+TAR_CMD="tar $TAR_DECOMP -xvf"
+TAR_DECOMP=""
 
 function disable_signature_check() {
 	SIGN_CHECK=0
 }
 
+function release_tar_xz() {
+	TAR_EXT="tar.xz"
+	TAR_DECOMP="-J"
+}
+
 function release_tar_zst() {
 	TAR_EXT="tar.zst"
-	TAR_CMD="tar --zstd -xvf"
+	TAR_DECOMP="--zstd"
 }
 
 function release_version() {

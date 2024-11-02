@@ -3,7 +3,9 @@
 . lib/ib.sh
 
 function main() {
+	release_tar_xz
 	release_version "23.05.5"
+
 	firmware_packages "luci"
 
 	prepare_imagebuilder "ath79" "generic"

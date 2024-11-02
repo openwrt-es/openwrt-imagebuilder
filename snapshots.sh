@@ -6,7 +6,9 @@ BCM63xx_BCMA="-kmod-b43 kmod-brcmsmac"
 BCM63xx_SSB="-kmod-b43 -wpad-mini kmod-brcm-wl nas wlc"
 
 function main() {
+	release_tar_zst
 	release_version "snapshots"
+
 	firmware_packages "luci luci-proto-ipv6"
 
 	prepare_imagebuilder "ar71xx" "generic"

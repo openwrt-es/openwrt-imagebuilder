@@ -6,7 +6,9 @@ BCM63xx_BCMA="-kmod-b43 kmod-brcmsmac"
 BCM63xx_SSB="-kmod-b43 -wpad-mini kmod-brcm-wl nas wlc"
 
 function main() {
+	release_tar_xz
 	release_version "19.07.2"
+
 	firmware_packages "luci luci-proto-ipv6 libmosquitto-ssl"
 
 	prepare_imagebuilder "brcm63xx" "generic"
