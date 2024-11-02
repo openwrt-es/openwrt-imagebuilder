@@ -3,8 +3,10 @@
 . lib/ib.sh
 
 function main() {
-	release_tar_xz
-	release_version "23.05.5"
+	disable_signature_check
+
+	release_tar_zst
+	release_version "24.10-SNAPSHOT"
 
 	firmware_packages "bcm27xx-userland bird2 qrencode \
 		irqbalance btop htop mosquitto-client-nossl \
