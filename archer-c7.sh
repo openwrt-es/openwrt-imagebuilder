@@ -3,8 +3,8 @@
 . lib/ib.sh
 
 function main() {
-	release_tar_xz
-	release_version "23.05.5"
+	release_tar_zst
+	release_version "snapshots"
 
 	firmware_packages "luci"
 
