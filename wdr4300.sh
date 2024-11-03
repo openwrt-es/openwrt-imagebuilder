@@ -3,10 +3,10 @@
 . lib/ib.sh
 
 function main() {
-	release_tar_xz
-	release_version "23.05.5"
+	release_tar_zst
+	release_version "snapshots"
 
-	firmware_packages "luci luci-app-ddns wget-ssl drill"
+	firmware_packages "luci luci-app-ddns"
 
 	prepare_imagebuilder "ath79" "generic"
 	build_firmware "ath79/generic" "tplink_tl-wdr4300-v1" "openwrt-*-tplink_tl-wdr4300-*.*"
