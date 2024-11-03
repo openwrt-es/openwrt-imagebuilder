@@ -12,7 +12,7 @@ start() {
 
 eth_cpu_affinity() {
 	# eth0
-	echo 1 > /proc/irq/36/smp_affinity
+	echo 2 > /proc/irq/36/smp_affinity
 	# eth1
 	echo 2 > /proc/irq/37/smp_affinity
 }
