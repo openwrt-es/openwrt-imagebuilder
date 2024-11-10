@@ -3,8 +3,6 @@
 . lib/ib.sh
 
 function main() {
-	disable_signature_check
-
 	release_tar_zst
 	release_version "24.10-SNAPSHOT"
 
