@@ -7,7 +7,8 @@ function main() {
 	release_version "24.10-SNAPSHOT"
 
 	firmware_packages "bird2 qrencode \
-		luci luci-app-sqm luci-app-upnp luci-proto-wireguard \
+		luci-ssl luci-app-uhttpd \
+		luci-app-sqm luci-app-upnp luci-proto-wireguard \
 		luci-app-ddns wget-ssl drill \
 		-ath10k-firmware-qca9984-ct ath10k-firmware-qca9984 \
 		-kmod-ath10k-ct kmod-ath10k"
