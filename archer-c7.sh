@@ -7,7 +7,8 @@ function main() {
 	release_version "24.10-SNAPSHOT"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
-	luci-app-ddns wget-ssl drill"
+		luci-app-ddns wget-ssl drill \
+		luci-proto-wireguard qrencode"
 
 	prepare_imagebuilder "ath79" "generic"
 	build_firmware "ath79/generic" "tplink_archer-c7-v2" "openwrt-*-tplink_archer-c7-v2*.*"
