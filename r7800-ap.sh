@@ -4,7 +4,7 @@
 
 function main() {
 	release_tar_zst
-	release_version "24.10-SNAPSHOT"
+	release_version "24.10.0-rc2"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		-ath10k-firmware-qca9984-ct ath10k-firmware-qca9984 \
