@@ -10,8 +10,10 @@ function main() {
 		luci-app-ddns wget-ssl drill \
 		luci-proto-wireguard qrencode \
 		luci-app-sqm luci-app-upnp \
+		luci-app-omcproxy luci-app-udpxy \
 		bird2 ethtool htop mosquitto-client-nossl \
 		kmod-r8169 \
+		kmod-ipt-nathelper-rtsp \
 		kmod-usb-net-asix-ax88179 kmod-usb-net-rtl8152 usbutils"
 	firmware_files "files/rpi5-router"
 	firmware_rootfs_partsize 256
