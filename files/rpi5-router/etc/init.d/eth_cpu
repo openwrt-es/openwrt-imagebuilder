@@ -1,6 +1,6 @@
 #!/bin/sh /etc/rc.common
 
-START=25
+START=99
 
 boot() {
 	eth_cpu_affinity
@@ -20,11 +20,15 @@ eth_cpu_affinity() {
 	fi
 
 	if [ ! -z "$irq_off" ]; then
+		mmc0_irq=$((irq_off + 31))
+		mmc1_irq=$((irq_off + 32))
 		eth0_irq=$((irq_off + 102))
 		usb1_irq=$((irq_off + 127))
 		usb3_irq=$((irq_off + 132))
 		eth1_irq=$((irq_off + 157))
 
+		echo 4 > /proc/irq/$mmc0_irq/smp_affinity
+		echo 4 > /proc/irq/$mmc1_irq/smp_affinity
 		echo 8 > /proc/irq/$eth0_irq/smp_affinity
 		echo 4 > /proc/irq/$usb1_irq/smp_affinity
 		echo 4 > /proc/irq/$usb3_irq/smp_affinity
