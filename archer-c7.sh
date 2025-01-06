@@ -8,6 +8,7 @@ function main() {
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		luci-app-ddns wget-ssl drill \
+		luci-app-banip \
 		luci-proto-wireguard qrencode \
 		htop"
 
