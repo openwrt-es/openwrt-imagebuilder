@@ -7,6 +7,7 @@ function main() {
 	release_version "24.10.0-rc5"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
+		luci-app-banip \
 		-ath10k-firmware-qca9984-ct ath10k-firmware-qca9984 \
 		-kmod-ath10k-ct kmod-ath10k"
 

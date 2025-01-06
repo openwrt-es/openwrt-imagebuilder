@@ -9,7 +9,7 @@ function main() {
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		luci-app-ddns wget-ssl drill \
 		luci-proto-wireguard qrencode \
-		luci-app-sqm luci-app-upnp \
+		luci-app-banip luci-app-sqm luci-app-upnp \
 		bird2 ethtool htop mosquitto-client-nossl \
 		-ath10k-firmware-qca9984-ct ath10k-firmware-qca9984 \
 		-kmod-ath10k-ct kmod-ath10k"
