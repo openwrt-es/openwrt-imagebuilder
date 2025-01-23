@@ -4,7 +4,7 @@
 
 function main() {
 	release_tar_zst
-	release_version "24.10.0-rc5"
+	release_version "24.10.0-rc6"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		luci-app-banip \
