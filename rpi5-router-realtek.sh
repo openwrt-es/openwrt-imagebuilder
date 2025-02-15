@@ -9,9 +9,11 @@ function main() {
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		luci-app-ddns wget-ssl drill \
 		luci-proto-wireguard qrencode \
+		luci-proto-ipv6 6in4 kmod-ipt-nat6 \
 		luci-app-banip luci-app-sqm luci-app-upnp \
 		luci-app-omcproxy luci-app-udpxy \
 		bird2 ethtool htop mosquitto-client-nossl \
+		mtr btop \
 		kmod-rp1-adc \
 		kmod-r8168 kmod-r8125 kmod-r8126 \
 		kmod-ipt-nathelper-rtsp \
