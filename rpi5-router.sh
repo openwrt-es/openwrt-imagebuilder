@@ -22,7 +22,10 @@ function main() {
 	firmware_rootfs_partsize 256
 
 	prepare_imagebuilder "bcm27xx" "bcm2712"
-	build_firmware "bcm27xx/bcm2712" "rpi-5" "openwrt-*-rpi-5*.*"
+	prepare_sdk "bcm27xx" "bcm2712" "gcc-13.3.0_musl"
+
+	build_sdk_packages "bcm27xx/bcm2712" "rpi-5" "omcproxy"
+	#build_firmware "bcm27xx/bcm2712" "rpi-5" "openwrt-*-rpi-5*.*"
 }
 
 main
