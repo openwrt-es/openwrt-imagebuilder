@@ -10,6 +10,7 @@ function main() {
 		luci-app-ddns wget-ssl drill \
 		luci-app-banip \
 		luci-proto-wireguard qrencode \
+		luci-proto-ipv6 6in4 kmod-ipt-nat6 \
 		htop"
 
 	prepare_imagebuilder "ath79" "generic"
