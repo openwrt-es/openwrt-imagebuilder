@@ -4,7 +4,7 @@
 
 function main() {
 	release_tar_zst
-	release_version "24.10.1"
+	release_version "24.10-SNAPSHOT"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		luci-app-ddns wget-ssl drill \
@@ -15,7 +15,7 @@ function main() {
 		bird3 btop ethtool htop mosquitto-client-nossl \
 		mtr rpcapd \
 		kmod-rp1-adc \
-		kmod-r8168 kmod-r8125 kmod-r8126 \
+		kmod-r8168 kmod-r8125 kmod-r8126 kmod-r8127 \
 		kmod-ipt-nathelper-rtsp \
 		kmod-usb-net-asix-ax88179 kmod-usb-net-rtl8152 usbutils"
 	firmware_files "files/rpi5-router"
