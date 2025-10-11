@@ -13,7 +13,9 @@ function main() {
 		luci-app-banip luci-app-sqm luci-app-upnp \
 		bird3 ethtool htop mosquitto-client-nossl mtr \
 		-ath10k-firmware-qca9984-ct ath10k-firmware-qca9984 \
-		-kmod-ath10k-ct kmod-ath10k"
+		-kmod-ath10k-ct kmod-ath10k \
+		block-mount kmod-usb-storage usbutils \
+		e2fsprogs kmod-fs-ext4"
 	firmware_files "files/r7800-router"
 
 	prepare_imagebuilder "ipq806x" "generic"
