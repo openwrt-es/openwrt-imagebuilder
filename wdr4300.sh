@@ -6,7 +6,7 @@ function main() {
 	release_tar_zst
 	release_version "25.12.0-rc1"
 
-	firmware_packages "luci luci-app-ddns"
+	firmware_packages "luci luci-app-ddns ddns-scripts-ovh"
 
 	prepare_imagebuilder "ath79" "generic"
 	build_firmware "ath79/generic" "tplink_tl-wdr4300-v1" "openwrt-*-tplink_tl-wdr4300-*.*"

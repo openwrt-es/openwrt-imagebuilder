@@ -7,7 +7,7 @@ function main() {
 	release_version "25.12.0-rc1"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
-		luci-app-ddns wget-ssl drill \
+		luci-app-ddns ddns-scripts-ovh wget-ssl drill \
 		luci-proto-wireguard qrencode \
 		luci-app-sqm luci-app-upnp \
 		bird3 ethtool htop mosquitto-client-nossl \
