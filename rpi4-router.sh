@@ -4,7 +4,7 @@
 
 function main() {
 	release_tar_zst
-	release_version "25.12.0-rc2"
+	release_version "25.12.0-rc3"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		luci-app-ddns ddns-scripts-ovh wget-ssl drill \
