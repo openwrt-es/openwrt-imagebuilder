@@ -7,7 +7,7 @@ function main() {
 	release_version "25.12.0-rc3"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
-		luci-app-ddns ddns-scripts-ovh wget-ssl drill \
+		luci-app-ddns wget-ssl drill \
 		luci-proto-wireguard qrencode \
 		luci-proto-ipv6 6in4 kmod-ipt-nat6 \
 		luci-app-banip luci-app-sqm luci-app-upnp \
