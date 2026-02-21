@@ -4,7 +4,7 @@
 
 function main() {
 	release_tar_zst
-	release_version "25.12.0-rc3"
+	release_version "25.12.0-rc5"
 
 	firmware_packages "luci luci-app-ddns"
 
