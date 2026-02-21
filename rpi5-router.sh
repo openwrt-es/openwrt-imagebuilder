@@ -9,15 +9,15 @@ function main() {
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		luci-app-ddns wget-ssl drill \
 		luci-proto-wireguard qrencode \
-		luci-proto-ipv6 6in4 kmod-ipt-nat6 \
+		luci-proto-ipv6 kmod-ipt-nat6 \
 		luci-app-banip luci-app-sqm luci-app-upnp \
 		luci-app-omcproxy luci-app-udpxy \
 		bird3 btop ethtool htop mosquitto-client-nossl \
-		mtr rpcapd \
+		mtr rpcapd tcpdump \
 		kmod-rp1-adc \
 		kmod-r8169 \
 		kmod-ipt-nathelper-rtsp \
-		kmod-usb-net-asix-ax88179 kmod-usb-net-rtl8152 usbutils"
+		kmod-usb-net-rtl8152 usbutils"
 	firmware_files "files/rpi5-router"
 	firmware_rootfs_partsize 256
 
