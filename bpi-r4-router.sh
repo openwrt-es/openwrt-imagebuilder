@@ -13,10 +13,10 @@ function main() {
 		luci-app-banip luci-app-sqm luci-app-upnp \
 		luci-app-omcproxy luci-app-udpxy \
 		bird3 btop ethtool htop mosquitto-client-nossl \
-		mtr rpcapd tcpdump usbutils \
+		mtr rpcapd tcpdump usbutils i2c-tools \
 		kmod-ipt-nathelper-rtsp \
 		-kmod-mt7996-firmware -kmod-mt7996-233-firmware \
-		kmod-mt7921-firmware kmod-mt7921e"
+		kmod-mt7921-firmware kmod-mt7921e kmod-mt7921u"
 
 	prepare_imagebuilder "mediatek" "filogic"
 	build_firmware "mediatek/filogic" "bananapi_bpi-r4" "openwrt-*-bananapi_bpi-r4-*.*"
