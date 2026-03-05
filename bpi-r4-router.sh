@@ -12,7 +12,7 @@ function main() {
 		luci-proto-ipv6 kmod-ipt-nat6 \
 		luci-app-banip luci-app-sqm luci-app-upnp \
 		luci-app-omcproxy luci-app-udpxy \
-		bird3 btop ethtool htop mosquitto-client-nossl \
+		bird3 btop ethtool-full htop mosquitto-client-nossl \
 		mtr rpcapd tcpdump usbutils i2c-tools \
 		kmod-nf-nathelper-rtsp \
 		-kmod-mt7996-firmware -kmod-mt7996-233-firmware \
