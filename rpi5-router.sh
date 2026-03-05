@@ -16,7 +16,7 @@ function main() {
 		mtr rpcapd tcpdump \
 		kmod-rp1-adc \
 		kmod-r8169 \
-		kmod-ipt-nathelper-rtsp \
+		kmod-nf-nathelper-rtsp \
 		kmod-usb-net-rtl8152 usbutils"
 	firmware_files "files/rpi5-router"
 	firmware_rootfs_partsize 256

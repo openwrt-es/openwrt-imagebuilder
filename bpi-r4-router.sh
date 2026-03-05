@@ -14,7 +14,7 @@ function main() {
 		luci-app-omcproxy luci-app-udpxy \
 		bird3 btop ethtool htop mosquitto-client-nossl \
 		mtr rpcapd tcpdump usbutils i2c-tools \
-		kmod-ipt-nathelper-rtsp \
+		kmod-nf-nathelper-rtsp \
 		-kmod-mt7996-firmware -kmod-mt7996-233-firmware \
 		kmod-mt7921-firmware kmod-mt7921e kmod-mt7921u"
 
