@@ -1,18 +1,34 @@
 #!/bin/sh /etc/rc.common
 
-START=25
+START=99
 
 boot() {
-	eth_cpu_affinity
+	irq_cpu_affinity
 }
 
 start() {
-	eth_cpu_affinity
+	irq_cpu_affinity
 }
 
-eth_cpu_affinity() {
-	# eth0
-	echo 2 > /proc/irq/36/smp_affinity
-	# eth1
-	echo 2 > /proc/irq/37/smp_affinity
+irq_cpu_affinity() {
+	local irq_off
+	local eth0_irq eth1_irq
+	local usb_irq
+
+	if [ -f "/proc/irq/32/smp_affinity" ]; then
+		irq_off=0
+	fi
+
+	if [ ! -z "$irq_off" ]; then
+		eth0_irq=$((irq_off + 32))
+		eth1_irq=$((irq_off + 33))
+		usb_irq=$((irq_off + 48))
+
+		# CPU 1
+		echo 1 > /proc/irq/$eth1_irq/smp_affinity
+
+		# CPU 2
+		echo 2 > /proc/irq/$eth0_irq/smp_affinity
+		echo 2 > /proc/irq/$usb_irq/smp_affinity
+	fi
 }
