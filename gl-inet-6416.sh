@@ -4,7 +4,7 @@
 
 function main() {
 	release_tar_zst
-	release_version "25.12.0"
+	release_version "25.12.1"
 
 	firmware_packages "luci-ssl luci-app-uhttpd \
 		luci-proto-ipv6 \
